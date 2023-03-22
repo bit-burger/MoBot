@@ -1,5 +1,5 @@
 // Importing modules
-const fs = require("node:fs");
+const fs = require("node:fs")
 const path = require("node:path");
 
 // Importing classes
@@ -15,7 +15,9 @@ const {
 
 // Creating new client
 const client = new Client({
-    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
+    
+
+    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
 });
 
 // Initializing database
