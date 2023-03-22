@@ -116,8 +116,9 @@ dist
 # TernJS port file
 .tern-port
 
-# Stores VSCode versions used for testing VSCode extensions
+# VSCode
 .vscode-test
+.vscode/
 
 # yarn v2
 .yarn/cache
@@ -126,5 +127,8 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# macos
+# macOS
 **/.DS_Store
+
+# config
+configuration.json
