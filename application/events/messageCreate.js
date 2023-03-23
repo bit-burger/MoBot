@@ -24,7 +24,7 @@ module.exports = {
         const content = message.content.toLowerCase()
         if(!content.includes("mo") && !content.includes("m0")) return
         const includedNegativeWord = includesNegativeWord(content)
-        if(content.includes("nicht")) {
+        if(content.includes("nicht") || content.includes("not")) {
             message.reply("Negative words are not allowed in the same sentence as Mos holy name, regardless of the context")
         }
         else if(includedNegativeWord) {
