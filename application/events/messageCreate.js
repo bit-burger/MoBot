@@ -2,7 +2,7 @@ const {Events} = require("discord.js")
 const fs = require("node:fs")
 
 const negativeWordsBuffer = fs.readFileSync("./resources/negative.txt")
-const negativeWords = negativeWordsBuffer.toString().split("\n")
+const negativeWords = negativeWordsBuffer.toString().split(/\r?\n/)
 
 function includesNegativeWord(s) {
     for(const negativeWord of negativeWords) {

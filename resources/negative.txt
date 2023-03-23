@@ -94,6 +94,7 @@ brüchig
 brutal
 chaotisch
 dämlich
+dämmlich
 debil
 defekt
 defizitär
@@ -119,6 +120,7 @@ dürr
 dusselig
 düster
 egoistisch
+ehrenlos
 eigenartig
 einfältig
 eingeschränkt
@@ -158,6 +160,8 @@ feig
 feige
 feindlich
 feindselig
+fick
+ficker
 fies
 finster
 flach
