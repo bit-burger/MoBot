@@ -25,7 +25,10 @@ module.exports = {
         if(!content.includes("mo") && !content.includes("m0")) return
         const includedNegativeWord = includesNegativeWord(content)
         if(includedNegativeWord) {
-            message.reply("fake, do not use " + includedNegativeWord)
+            message.reply("How dare you refer to Mo the allmighty as " + includedNegativeWord)
+        }
+        else if(content.includes("nicht")) {
+            message.reply("Negative words are not allowed in the same sentence as Mos holy name, regardless of the context")
         }
     },
 };
