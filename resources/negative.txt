@@ -666,3 +666,6 @@ zweideutig
 zweifelhaft
 zweitklassig
 zwiespältig
+dreck
+schmok
+honk
