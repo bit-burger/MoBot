@@ -1,5 +1,6 @@
 const {Events} = require("discord.js")
 const fs = require("node:fs")
+const dao = require("../../database/mo_credit_dao")
 
 const negativeWordsBuffer = fs.readFileSync("./resources/negative.txt")
 const negativeWords = negativeWordsBuffer.toString().split(/\r?\n/)
@@ -19,7 +20,7 @@ module.exports = {
     once: false,
 
     // Handling event
-    execute(message) {
+    async execute(message) {
         if(message.author.bot) return;
         const content = message.content.toLowerCase()
         if(!content.includes("mo ") && !content.includes("m0 ")) return
@@ -33,5 +34,9 @@ module.exports = {
         else if(includedNegativeWord) {
             message.reply("How dare you refer to Mo the allmighty as " + includedNegativeWord)
         }
+        const userID = message.author.id;
+        const credits = await dao.getCredits(message.client, userID)
+        message.reply(credits.toString())
+        await dao.setCredits(message.client, userID, credits + 10)
     },
 };
