@@ -22,7 +22,10 @@ module.exports = {
     execute(message) {
         if(message.author.bot) return;
         const content = message.content.toLowerCase()
-        if(!content.includes("mo") && !content.includes("m0")) return
+        if(!content.includes("mo ") && !content.includes("m0 ")) return
+        if(!/^mo/i.test(message) && !/^m0/i.test(message)) {
+            if(!content.includes(" mo") && !content.includes(" m0") && !content.includes("|mo") && !content.includes("*mo")) return
+        }
         const includedNegativeWord = includesNegativeWord(content)
         if(content.includes("nicht") || content.includes("not")) {
             message.reply("Negative words are not allowed in the same sentence as Mos holy name, regardless of the context")
