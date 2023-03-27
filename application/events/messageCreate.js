@@ -33,10 +33,17 @@ module.exports = {
         }
         else if(includedNegativeWord) {
             message.reply("How dare you refer to Mo the allmighty as " + includedNegativeWord)
+            const userID = message.author.id;
+            const credits = await dao.getCredits(message.client, userID)
+            message.reply("Your lack of respect towards mo has costed you Credits!: " + (credits - 10).toString())
+            await dao.setCredits(message.client, userID, credits - 10)
         }
-        const userID = message.author.id;
-        const credits = await dao.getCredits(message.client, userID)
-        message.reply(credits.toString())
-        await dao.setCredits(message.client, userID, credits + 10)
+        else if(content.includes("stfu")) message.reply("you stfu") 
+        else {
+            const userID = message.author.id;
+            const credits = await dao.getCredits(message.client, userID)
+            message.reply("Well done, you have earned 10 credits: " + (credits +10).toString())
+            await dao.setCredits(message.client, userID, credits + 10)
+        }
     },
 };
