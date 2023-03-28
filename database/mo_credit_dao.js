@@ -17,7 +17,7 @@ async function getCreditsMap(client, idList) {
     const map = new Map()
     const { count, rows } = await moCredit.findAndCountAll({
         where: {
-            title: {
+            userID: {
                 [Op.in]: idList,
             }
         },
