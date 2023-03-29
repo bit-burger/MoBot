@@ -25,8 +25,8 @@ module.exports = {
         credits += interaction.options.getInteger("how_much")
         await dao.setCredits(interaction.client, user.id, credits)
         interaction.reply({
-            content: "The credits of " + userMention(user.id) + " have been fixed! :muscle::muscle::muscle::muscle:\n" +
-                `They now have ${credits} mo credits:flushed:`,
+            content: "The credits of " + userMention(user.id) + " have been fixed! :muscle::muscle:\n" +
+                `They now have ${credits} mo credits :flushed:`,
         })
         interaction.channel.send({ content: "https://media.tenor.com/1j4ZfgiFYY0AAAAd/moschops.gif" })
     },
