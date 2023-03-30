@@ -17,7 +17,6 @@ module.exports = {
 
     // Handling command autocomplete
     async autocomplete(interaction) { },
-    //test
 
     // Handling command reponse
     async execute(interaction) {
