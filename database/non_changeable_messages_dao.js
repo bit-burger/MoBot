@@ -10,9 +10,17 @@ async function setNonChangeableMessage(client, messageID) {
 }
 
 async function isNonChangeableMessage(client, messageID) {
+    nonChangeMessages = getNonChangeMessages(client)
     await nonChangeMessages.findOne({
         where: { messageID },
     });
 }
 
-module.exports = { setNonChangeableMessage, isNonChangeableMessage }
+async function setIsChangeableMessage(client, messageID) {
+    nonChangeMessages = getNonChangeMessages(client)
+    await nonChangeMessages.destroy({
+        where: { messageID }
+    })
+}
+
+module.exports = { setNonChangeableMessage, isNonChangeableMessage, isNonChangeableMessage }
