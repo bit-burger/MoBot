@@ -23,9 +23,9 @@ module.exports = {
     async execute(message) {
         if(message.author.bot) return;
         const content = message.content.toLowerCase()
-        if(!content.includes("mo ") && !content.includes("m0 ")) return
+        
         if(!/^mo/i.test(message) && !/^m0/i.test(message)) {
-            if(!content.includes(" mo") && !content.includes(" m0") && !content.includes("|mo") && !content.includes("*mo") && !content.includes("@mo")) return
+            if(!content.includes(" mo") && !content.includes(" m0") && !content.includes("|mo") && !content.includes("*mo") && !content.includes("@mo") && !content.includes("mo ") && !content.includes("m0 ")) return
         }
         const includedNegativeWord = includesNegativeWord(content)
         if(content.includes("nicht") || content.includes("not") || content.includes("negativ")) {
@@ -38,7 +38,7 @@ module.exports = {
             message.reply("Your lack of respect towards mo has costed you Credits!: " + (credits - 10).toString())
             await dao.setCredits(message.client, userID, credits - 10)
         }
-        else if(content.includes("stfu")) message.reply("you stfu") 
+        else if(content.includes("stfu") || content.includes("shut")) message.reply("you stfu") 
         else {
             const userID = message.author.id;
             const credits = await dao.getCredits(message.client, userID)
