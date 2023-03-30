@@ -21,9 +21,12 @@ module.exports = {
 
     // Handling event
     async execute(message) {
-        if(message.author.bot) return;
+        if(message.author.bot && !message.content.toLowerCase().includes("mo") && !message.content.toLowerCase().includes("credits")) {
+            message.reply("Mo is superior");
+            return;
+        }
         const content = message.content.toLowerCase()
-        
+        if(message.author.bot) return;
         if(!/^mo/i.test(message) && !/^m0/i.test(message)) {
             if(!content.includes(" mo") && !content.includes(" m0") && !content.includes("|mo") && !content.includes("*mo") && !content.includes("@mo") && !content.includes("mo ") && !content.includes("m0 ")) return
         }
