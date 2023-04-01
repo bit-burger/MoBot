@@ -10,9 +10,15 @@ module.exports = async (sequelize) => {
                 type: DataTypes.STRING,
                 primaryKey: true,
             },
+            authorID: {
+                type: DataTypes.STRING,
+            },
+
         },
 
         // Options
-        {}
+        {
+            timestamps: false,
+        }
     );
 };
