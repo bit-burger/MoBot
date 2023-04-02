@@ -1,3 +1,5 @@
+const canUseCommand = require("./general/can_use_command")
+
 // Importing classes
 const { SlashCommandBuilder, Role, GuildMember, EmbedBuilder, Collection, userMention } = require("discord.js");
 
@@ -58,6 +60,7 @@ module.exports = {
 
     // Handling command reponse
     async execute(interaction) {
+        if (!await canUseCommand(interaction)) return
         const mentionable = interaction.options.getMentionable("who");
         const mentionedUsersMap = await getUsersMapFromMentionable(mentionable);
         const mentionedUsersIds = [...mentionedUsersMap.keys()]

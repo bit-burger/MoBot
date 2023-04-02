@@ -3,7 +3,7 @@ const fs = require("node:fs")
 const path = require("node:path");
 
 // Importing classes
-const { Client, Collection, GatewayIntentBits } = require("discord.js");
+const { Client, Collection, GatewayIntentBits, Partials } = require("discord.js");
 const { Sequelize } = require("sequelize");
 
 // Importing configuration data
@@ -15,7 +15,8 @@ const {
 
 // Creating new client
 const client = new Client({
-    intents: [GatewayIntentBits.GuildMembers, GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
+    partials: [Partials.Message],
+    intents: [GatewayIntentBits.GuildMembers, GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.AutoModerationConfiguration, GatewayIntentBits.GuildModeration],
 });
 
 // Initializing database

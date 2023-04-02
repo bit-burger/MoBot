@@ -1,3 +1,5 @@
+const canUseCommand = require("./general/can_use_command")
+
 const dao = require("../../database/mo_credit_dao")
 
 const { SlashCommandBuilder, userMention, Sticker, GuildStickerManager } = require("discord.js");
@@ -20,6 +22,7 @@ module.exports = {
 
     // Handling command reponse
     async execute(interaction) {
+        if (!await canUseCommand(interaction)) return
         const user = interaction.options.getUser("who")
         let credits = await dao.getCredits(interaction.client, interaction.user.id)
         credits += interaction.options.getInteger("how_much")
