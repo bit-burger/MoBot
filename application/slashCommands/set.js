@@ -1,6 +1,6 @@
 const dao = require("../../database/mo_credit_dao")
 
-const { SlashCommandBuilder, userMention, Sticker, GuildStickerManager } = require("discord.js");
+const { SlashCommandBuilder, userMention, Role, GuildMember, Sticker, GuildStickerManager } = require("discord.js");
 
 const moschopsGif = "https://media.tenor.com/1j4ZfgiFYY0AAAAC/moschops.gif";
 

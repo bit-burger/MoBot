@@ -21,15 +21,29 @@ module.exports = {
 
     // Handling event
     async execute(message) {
-        if(message.author.bot && !message.content.toLowerCase().includes("mo") && !message.content.toLowerCase().includes("credits")) {
-            message.reply("Mo is superior");
+        if(message.author.bot && message.author.id != 1087435325099483166) {
+            message.reply("Mo-Bot is superior");
             return;
         }
-        const content = message.content.toLowerCase()
-        if(message.author.bot) return;
-        if(!/^mo/i.test(message) && !/^m0/i.test(message)) {
-            if(!content.includes(" mo") && !content.includes(" m0") && !content.includes("|mo") && !content.includes("*mo") && !content.includes("@mo") && !content.includes("mo ") && !content.includes("m0 ")) return
+        if(message.author.id == 1082986285326676050) {
+            message.reply("Your Highness, I bow before you")
+            return
         }
+        const content = message.content.toLowerCase() 
+        if(message.author.bot) return;
+       
+        function lastWord(words) {
+            var n = words.split(" ");
+            return n[n.length - 1];
+        
+        } 
+        if(/^mo/i.test(message) || /^m0/i.test(message)) {
+            if(!content.includes("mo ") && !content.includes("m0 ")) return
+        } 
+        else if(lastWord(content) != "mo" && lastWord(content) != "m0"){
+            if(!content.includes(" mo ") && !content.includes(" m0 ")) return
+        }
+
         const includedNegativeWord = includesNegativeWord(content)
         if(content.includes("nicht") || content.includes("not") || content.includes("negativ")) {
             message.reply("Negative words are not allowed in the same sentence as Mos holy name, regardless of the context")
