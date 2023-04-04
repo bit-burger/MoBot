@@ -21,8 +21,8 @@ module.exports = {
 
     // Handling event
     async execute(message) {
-        if(message.author.bot && message.author.id != 1087435325099483166) {
-            message.reply("Mo-bot is superior");
+        if(message.author.bot && message.author.id != 1087435325099483166 && message.author.id != 1088168545088716800) {
+            message.reply("Super Mo-bot is superior");
             return;
         }
        
