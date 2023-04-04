@@ -25,13 +25,15 @@ module.exports = {
             message.reply("Mo-bot is superior");
             return;
         }
-        if(message.author.id == 1082986285326676050) {
-            message.reply("Your Highness, I bow before you")
-            return
-        }
-        if(message.author.id == 1080894550031216740) {
-            //message.reply("Bow before the allmighty Mo")
-            return
+       
+        if(message.author.id == 788001029476188164 || message.author.id == 708227359916163137 || message.author.id == 1082986285326676050) {
+            if(message.content.toLowerCase().includes("mo")){
+                if(message.content.toLowerCase().includes("thank") || message.content.toLowerCase().includes("thx") || message.content.toLowerCase().includes("dank") || message.content.toLowerCase().includes("gut") || message.content.toLowerCase().includes("good")) {
+                    message.reply("I am delighted I could help and serve you")
+                    return
+                }
+            }
+            
         }
         if(message.author.id == 567666740947976222) {
             
@@ -59,7 +61,7 @@ module.exports = {
             const name = getName(content)
             const zeichen = plusOrMinus(content)
             const credits = getCredit(content)
-            const userID = name.substring(2, 21)
+            const userID = name.substring(2, name.length - 1)
             const currentCredits = await dao.getCredits(message.client, userID)
             if(strafe === "award" || strafe === "belohn") {
                 await dao.setCredits(message.client, userID, currentCredits + credits)
@@ -76,7 +78,7 @@ module.exports = {
             const name = getName(content)
             const zeichen = plusOrMinus(content)
             const credits = getCredit(content)
-            const userID = name.substring(2, 21)
+            const userID = name.substring(2, name.length - 1)
             const currentCredits = await dao.getCredits(message.client, userID)
             if(strafe === "award" || strafe === "belohn") {
                 await dao.setCredits(message.client, userID, currentCredits + credits)
@@ -88,7 +90,10 @@ module.exports = {
             }
             return;
         }
-        
+        if(message.author.id == 1082986285326676050) {
+            message.reply("Your Highness, I bow before you")
+            return
+        }
         if(message.author.bot) return;
        
         function lastWord(words) {
