@@ -8,7 +8,7 @@ const moschopsGif = "https://media.tenor.com/1j4ZfgiFYY0AAAAC/moschops.gif";
 
 module.exports = {
     // Setting command information and options
-    data: new SlashCommandBuilder().setName("change").setDescription("change credits of a single user")
+    data: new SlashCommandBuilder().setName("change").setDescription("WARNING: OUT OF ORDER")
         .addUserOption((option) =>
             option.setName("who").setDescription("who to query results from").setRequired(true)
         )

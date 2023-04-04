@@ -22,14 +22,73 @@ module.exports = {
     // Handling event
     async execute(message) {
         if(message.author.bot && message.author.id != 1087435325099483166) {
-            message.reply("Mo-Bot is superior");
+            message.reply("Mo-bot is superior");
             return;
         }
         if(message.author.id == 1082986285326676050) {
             message.reply("Your Highness, I bow before you")
             return
         }
+        if(message.author.id == 1080894550031216740) {
+            //message.reply("Bow before the allmighty Mo")
+            return
+        }
+        if(message.author.id == 567666740947976222) {
+            
+            return
+        }
+        function getName(words) {
+            var m = words.split(" ");
+            return m[2];
+        } 
+        function getCredit(words) {
+            var m = words.split(" ");
+            return m[m.length - 2];
+        } 
+        function plusOrMinus(words) {
+            var m = words.split(" ");
+            return m[m.length - 2];
+        } 
+        function punishment(words) {
+            var m = words.split(" ");
+            return m[1];
+        } 
         const content = message.content.toLowerCase() 
+        if(message.author.id == 788001029476188164 && content.includes("supermobot")) {
+            const strafe = punishment(content)
+            const name = getName(content)
+            const zeichen = plusOrMinus(content)
+            const credits = getCredit(content)
+            const userID = name.substring(2, 21)
+            const currentCredits = await dao.getCredits(message.client, userID)
+            if(strafe === "award" || strafe === "belohn") {
+                await dao.setCredits(message.client, userID, currentCredits + credits)
+                message.reply("Very well. " + name + " shall receive " + credits + " credits.")
+            }
+            if(strafe === "punish" || strafe === "bestraf") {
+                await dao.setCredits(message.client, userID, currentCredits - credits)
+                message.reply("Very well. I shall take " + credits + " credits from " + name)
+            }
+            return;
+        }
+        else if(message.author.id == 1082986285326676050 && content.includes("supermobot")) {
+            const strafe = punishment(content)
+            const name = getName(content)
+            const zeichen = plusOrMinus(content)
+            const credits = getCredit(content)
+            const userID = name.substring(2, 21)
+            const currentCredits = await dao.getCredits(message.client, userID)
+            if(strafe === "award" || strafe === "belohn") {
+                await dao.setCredits(message.client, userID, currentCredits + credits)
+                message.reply("Very well. " + name + " shall receive " + credits + " credits.")
+            }
+            if(strafe === "punish" || strafe === "bestraf") {
+                await dao.setCredits(message.client, userID, currentCredits - credits)
+                message.reply("Very well. I shall take " + credits + " credits from " + name)
+            }
+            return;
+        }
+        
         if(message.author.bot) return;
        
         function lastWord(words) {

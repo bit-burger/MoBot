@@ -28,6 +28,6 @@ module.exports = {
             content: "The credits of " + userMention(user.id) + " have been fixed! :muscle::muscle:\n" +
                 `They now have ${credits} mo credits :flushed:`,
         })
-        interaction.channel.send({ content: "https://media.tenor.com/1j4ZfgiFYY0AAAAd/moschops.gif" })
+        //interaction.channel.send({ content: "https://media.tenor.com/1j4ZfgiFYY0AAAAd/moschops.gif" })
     },
 };
