@@ -24,10 +24,14 @@ module.exports = {
     async execute(message) {
         const isProphet = await prophetDao.isProphet(message.client, message.author.id)
 
-        if (message.author.bot && !isProphet && message.author.id != message.client.user.id) {
-            message.reply("Super Mo-bot is superior");
+        if (message.author.bot && !isProphet) {
+            if(message.author.id == 1088168545088716800 || message.author.id == 503720029456695306 || message.author.id == 458302301187342336)  message.reply("Super Mo-bot is superior");
             return;
         }
+        //if (message.author.id == 159985870458322944 && !isProphet && message.author.id != message.client.user.id) {
+          //  message.reply("Super Mo-bot is superior");
+            //return;
+        //}
 
         if (message.author.bot) return;
 
@@ -41,18 +45,7 @@ module.exports = {
 
         }
 
-        function getI(words) {
-            var m = words.split(" ");
-            var i = 0;
-            while(i < m.length()){
-                if(m[i].includes("<@")) {
-                    const wort = m[i];
-                    return wort.substring(2, wort.length - 1);
-                }
-                i = i + 1;
-            }
-            return
-        }
+       
         function getCredit(words) {
             var m = words.split(" ");
             var i = 0;
@@ -65,32 +58,31 @@ module.exports = {
             return;
         }
         function getId(words) {
-            //for (const word in words.split(" ")) {
-             // if (word.startsWith("<@")) {
-              //  return word.substring(2, word.length - 1)
-             // }
+            
                 const unnötig = words.split(" ")
                 const member = message.mentions.members.at(0).toString()
                 const name = member.substring(2, member.length -1)
                 return name;
             
           }
-        function plusOrMinus(words) {
-            var m = words.split(" ");
-            return m[m.length - 2];
-        }
+        
         function punishment(words) {
-            if (words.includes("award") || words.includes("gib") || words.includes("geben")) return "award"
-            if (words.includes("punish") || words.includes("remove") || words.includes("bestraf") || words.includes("entfern")) return "punish"
-            return;
+            if (words.includes("award") || words.includes("gib") || words.includes("geben") || words.includes("give")) return "award"
+            if (words.includes("punish") || words.includes("remove") || words.includes("bestraf") || words.includes("entfern") || words.includes("entz")) return "punish"
+            return "noPunishment";
+        }
+        function getProphetName(pName) {
+            if (pName === 788001029476188164) return "José"
+            if (pName === 708227359916163137) return "Tony"
+            return "Name not found. Perhaps the archives are incomplete?"
         }
         const content = message.content.toLowerCase()
-        if (message.author.id == 788001029476188164 && content.includes("mobot")) {
+        if (isProphet && content.includes("mobot")) {     //user interaction
             if(content.includes("credits")) {
                 //const name = "<@" + getId(content) + ">";
                 if(content.includes(" ich ") || content.includes("i ")) {                   
-                    const currentCredits = await dao.getCredits(message.client, "788001029476188164");
-                    message.reply("Currently, <@788001029476188164> has " + currentCredits + ".\n" + "Do you wish for me to add or remove some credits?")
+                    const currentCredits = await dao.getCredits(message.client, message.author.id);
+                    message.reply("Currently, <@" + message.author.id.toString() + "> has " + currentCredits + ".\n" + "Do you wish for me to add or remove some credits?")
                     return
                 }
                 else if(content.includes(" ole") || content.includes(" bolle") || content.includes(" öli") || content.includes(" hendrik")) {                   
@@ -125,40 +117,39 @@ module.exports = {
                     return
                 }
             }
-            else if(content.includes("explain") || content.includes("erklären")) {
+            else if(content.includes("explain") || content.includes("erklär")) {
                 message.reply("Certainly.\n" + "I am Mo-bot, however I have been recently upgraded and my new Name is Super Mo Bot. My sole purpose is to assure that <@1082986285326676050> the allmighty is respected in every way.\n" + "<@1082986285326676050> the Creator must be respected.\n"+"Do not associate negative words with <@1082986285326676050>.\n"+"<@1082986285326676050> disrespect is not tolerated and counts as a sin\n"+"Your loyalty to <@1082986285326676050> is stored in credits.\n"+"Fail to comply and the consequences will be severe.")
                 return
             }
+            
             else {
-                message.reply("Is there anything I can do for you?")
+                if (getProphetName(message.author.id).includes("archives")) {
+                    message.reply(getProphetName(message.author.id))
+                    return
+                }
+                message.reply("Is there anything I can do for you " + getProphetName(message.author.id) + " ?")
                 return
             }
         }
-        if (content.includes("supermobot") || content.includes("mobot")){
-            if(message.author.id != 788001029476188164 && message.author.id != 1082986285326676050) {
-                if(message.author.id == 708227359916163137){
-                    message.reply("Gemäß § 3 Absatz 2 des Mo Gesetzes wurdest du aufgrund versuchter Sabotage des Mo bots zu einem temporären Ausschluss des Mo Ordens verurteilt.\n"+"Die dauer des Ausschlusses wird dir im Nachhinein von <@1082986285326676050> persönlich bekanntgegeben")
-                    return
-                }
-                else {
-                    message.reply("My allegiance lies with Mo. Therefore I can only take orders from the Mo Council: <@788001029476188164> and the allmighty <@1082986285326676050> himself.")
-                }
+        if (content.includes("supermobot") || content.includes("mobot")){   //muss noch überarbeitet werden!!
+            if(!isProphet) {
+                    return;
             }
         }
-        if (message.author.id == 788001029476188164 && content.includes("credits")) {
-            const strafe = punishment(content)
-            const zeichen = plusOrMinus(content)
+        const strafe = punishment(content)
+        if (isProphet && content.includes("credits") && strafe != "noPunishment") {
+            //const zeichen = plusOrMinus(content)
             const credits = getCredit(content)
             
             if(content.includes(" me ") || content.includes(" ich ") || content.includes("i ") || content.includes(" mir ")) {                   
-                const currentCredits = await dao.getCredits(message.client, "788001029476188164");
+                const currentCredits = await dao.getCredits(message.client, message.author.id);
                 if (strafe === "award") {
-                    await dao.setCredits(message.client, "788001029476188164", currentCredits + credits)
-                    message.reply("Very well. <@788001029476188164> shall receive " + credits + " credits.")
+                    await dao.setCredits(message.client, message.author.id, currentCredits + credits)
+                    message.reply("Very well. <@" + message.author.id.toString() +"> shall receive " + credits + " credits.")
                 }
                  if (strafe === "punish") {
-                   await dao.setCredits(message.client, "788001029476188164", currentCredits - credits)
-                   message.reply("Very well. I shall take " + credits + " credits from <@788001029476188164>.")
+                   await dao.setCredits(message.client, message.author.id, currentCredits - credits)
+                   message.reply("Very well. I shall take " + credits + " credits from <@" + message.author.id.toString() +">.")
                 }                
                 return
             }
@@ -236,22 +227,8 @@ module.exports = {
              }
             return;
         }
-        else if (message.author.id == 1082986285326676050 && content.includes("supermobot")) {
-            const strafe = punishment(content)
-            const zeichen = plusOrMinus(content)
-            const credits = getCredit(content)
-            const userID = getId(content)
-            const currentCredits = await dao.getCredits(message.client, userID)
-            if (strafe === "award" || strafe === "gib") {
-                await dao.setCredits(message.client, userID, currentCredits + credits)
-                message.reply("Very well. <@" + userID + "> shall receive " + credits + " credits.")
-            }
-            if (strafe === "punish" || strafe === "bestraf") {
-                await dao.setCredits(message.client, userID, currentCredits - credits)
-                message.reply("Very well. I shall take " + credits + " credits from <@" + userID + ">.")
-            }
-            return;
-        }
+       
+        
         if (message.author.id == 1082986285326676050) {
             message.reply("Your Highness, I bow before you")
             return
