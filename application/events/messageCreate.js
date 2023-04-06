@@ -72,8 +72,8 @@ module.exports = {
             return "noPunishment";
         }
         function getProphetName(pName) {
-            if (pName === 788001029476188164) return "José"
-            if (pName === 708227359916163137) return "Tony"
+            if (pName === "788001029476188164") return "José"
+            if (pName === "708227359916163137") return "Tony"
             return "Name not found. Perhaps the archives are incomplete?"
         }
         const content = message.content.toLowerCase()
@@ -125,6 +125,10 @@ module.exports = {
             else {
                 if (getProphetName(message.author.id).includes("archives")) {
                     message.reply(getProphetName(message.author.id))
+                    return
+                }
+                if (content.includes("can") || content.includes("kann")){
+                    message.reply("Es tut mir leid, ich verfüge momentan nicht über die nötigen Fahigkeiten um das zu tun.")
                     return
                 }
                 message.reply("Is there anything I can do for you " + getProphetName(message.author.id) + " ?")
