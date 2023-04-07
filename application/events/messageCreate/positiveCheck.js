@@ -3,7 +3,7 @@ const fs = require("node:fs")
 const creditDao = require("../../../database/mo_credit_dao")
 const prophetDao = require("../../../database/prophet_dao")
 
-const positivePhrasesBuffer = fs.readFileSync("./resources/negative.txt")
+const positivePhrasesBuffer = fs.readFileSync("./resources/positive_phrases.txt")
 const positivePhrases = positivePhrasesBuffer
     .toString()
     .split(/\r?\n/)
