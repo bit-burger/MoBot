@@ -24,7 +24,7 @@ module.exports = {
     async execute(interaction) {
         if (!await canUseCommand(interaction)) return
         const user = interaction.options.getUser("who")
-        let credits = await dao.getCredits(interaction.client, interaction.user.id)
+        let credits = await dao.getCredits(interaction.client, user.id)
         credits += interaction.options.getInteger("how_much")
         await dao.setCredits(interaction.client, user.id, credits)
         interaction.reply({

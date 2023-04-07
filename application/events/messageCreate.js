@@ -80,17 +80,17 @@ module.exports = {
         if (isProphet && content.includes("mobot")) {     //user interaction
             if(content.includes("credits")) {
                 //const name = "<@" + getId(content) + ">";
-                if(content.includes(" ich ") || content.includes("i ")) {                   
+                if(content.includes(" ich") || content.includes("i ")) {                   
                     const currentCredits = await dao.getCredits(message.client, message.author.id);
                     message.reply("Currently, <@" + message.author.id.toString() + "> has " + currentCredits + ".\n" + "Do you wish for me to add or remove some credits?")
                     return
                 }
-                else if(content.includes(" ole") || content.includes(" bolle") || content.includes(" öli") || content.includes(" hendrik")) {                   
+                else if(content.includes("ole") || content.includes("bolle") || content.includes("öli") || content.includes("hendrik")) {                   
                     const currentCredits = await dao.getCredits(message.client, "724949595330969643");
                     message.reply("Currently, <@724949595330969643> has " + currentCredits + ".\n" + "Do you wish for me to add or remove some credits?")
                     return
                 }
-                else if(content.includes(" sina") || content.includes(" sally") || content.includes(" sima") || content.includes(" mailin")) {                   
+                else if(content.includes(" sina") || content.includes(" sally") || content.includes(" sima") || content.includes(" mailin") || content.includes(" sinoa")) {                   
                     const currentCredits = await dao.getCredits(message.client, "1013877344437555263");
                     message.reply("Currently, <@1013877344437555263> has " + currentCredits + ".\n" + "Do you wish for me to add or remove some credits?")
                     return
@@ -118,7 +118,7 @@ module.exports = {
                 }
             }
             else if(content.includes("explain") || content.includes("erklär")) {
-                message.reply("Certainly.\n" + "I am Mo-bot, however I have been recently upgraded and my new Name is Super Mo Bot. My sole purpose is to assure that <@1082986285326676050> the allmighty is respected in every way.\n" + "<@1082986285326676050> the Creator must be respected.\n"+"Do not associate negative words with <@1082986285326676050>.\n"+"<@1082986285326676050> disrespect is not tolerated and counts as a sin\n"+"Your loyalty to <@1082986285326676050> is stored in credits.\n"+"Fail to comply and the consequences will be severe.")
+                message.reply("Certainly.\n" + "I am Super Mo-bot. I am the upgraded version of the former Mo-bot. I was created by the holy Mo council. My sole purpose is to assure that Mo the allmighty is respected in every way.\n" + "Mo the Creator must be respected.\n"+"Do not associate negative words with Mo.\n"+"Mo disrespect is not tolerated and counts as a sin.\n"+"Your loyalty to Mo is stored in credits.\n"+"Now, should anyone, prophet or not, attempt to break these rules, they will be punished, in a manner consistent with the severity of their transgression. Furthermore they will be held accountable for their actions by the Mo council.")
                 return
             }
             
@@ -169,7 +169,7 @@ module.exports = {
                 }                
                 return
             }
-            else if(content.includes(" sina") || content.includes(" sally") || content.includes(" sima") || content.includes(" mailin")) {                   
+            else if(content.includes(" sina") || content.includes(" sally") || content.includes(" sima") || content.includes(" mailin") || content.includes(" sinoa")) {                   
                 const currentCredits = await dao.getCredits(message.client, "1013877344437555263");
                 if (strafe === "award") {
                     await dao.setCredits(message.client, "1013877344437555263", currentCredits + credits)
@@ -234,8 +234,8 @@ module.exports = {
        
         
         if (message.author.id == 1082986285326676050) {
-            message.reply("Your Highness, I bow before you")
-            return
+           //message.reply("Your Highness, I bow before you")
+         //   return
         }
         if (message.author.bot) return;
 
@@ -244,6 +244,7 @@ module.exports = {
             return n[n.length - 1];
 
         }
+        if(isProphet) return
         if (/^mo/i.test(message) || /^m0/i.test(message)) {
             if (!content.includes("mo ") && !content.includes("m0 ")) return
         }
