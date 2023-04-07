@@ -8,9 +8,9 @@ const moschopsGif = "https://media.tenor.com/1j4ZfgiFYY0AAAAC/moschops.gif";
 
 module.exports = {
     // Setting command information and options
-    data: new SlashCommandBuilder().setName("change").setDescription("WARNING: OUT OF ORDER")
+    data: new SlashCommandBuilder().setName("change").setDescription("adds or removes credits from a single user (fixed :) )")
         .addUserOption((option) =>
-            option.setName("who").setDescription("who to query results from").setRequired(true)
+            option.setName("who").setDescription("whos credits do you wish to change?").setRequired(true)
         )
         .addIntegerOption((option) =>
             option.setName("how_much")

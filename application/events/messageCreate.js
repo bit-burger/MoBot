@@ -80,7 +80,7 @@ module.exports = {
         if (isProphet && content.includes("mobot")) {     //user interaction
             if(content.includes("credits")) {
                 //const name = "<@" + getId(content) + ">";
-                if(content.includes(" ich") || content.includes("i ")) {                   
+                if(content.includes(" ich") || content.includes(" i ")) {                   
                     const currentCredits = await dao.getCredits(message.client, message.author.id);
                     message.reply("Currently, <@" + message.author.id.toString() + "> has " + currentCredits + ".\n" + "Do you wish for me to add or remove some credits?")
                     return
@@ -145,7 +145,7 @@ module.exports = {
             //const zeichen = plusOrMinus(content)
             const credits = getCredit(content)
             
-            if(content.includes(" me ") || content.includes(" ich ") || content.includes("i ") || content.includes(" mir ")) {                   
+            if(content.includes(" me ") || content.includes(" ich ") || content.includes(" i ") || content.includes(" mir ")) {                   
                 const currentCredits = await dao.getCredits(message.client, message.author.id);
                 if (strafe === "award") {
                     await dao.setCredits(message.client, message.author.id, currentCredits + credits)
