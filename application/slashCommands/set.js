@@ -1,4 +1,6 @@
 const dao = require("../../database/mo_credit_dao")
+const canUseCommand = require("./general/can_use_command")
+
 
 const { SlashCommandBuilder, userMention, Role, GuildMember, Sticker, GuildStickerManager } = require("discord.js");
 
@@ -6,7 +8,7 @@ const moschopsGif = "https://media.tenor.com/1j4ZfgiFYY0AAAAC/moschops.gif";
 
 module.exports = {
     // Setting command information and options
-    data: new SlashCommandBuilder().setName("set").setDescription("set credits of a single user WARNING: THIS FEATURE IS RESTRICTED TO THE MO COUNCIL")
+    data: new SlashCommandBuilder().setName("set").setDescription("set credits of a single user")
         .addUserOption((option) =>
             option.setName("who").setDescription("who to query results from").setRequired(true)
         )
@@ -20,6 +22,7 @@ module.exports = {
 
     // Handling command reponse
     async execute(interaction) {
+        if (!await canUseCommand(interaction)) return
         const user = interaction.options.getUser("who")
         let credits = interaction.options.getInteger("how_much")
         await dao.setCredits(interaction.client, user.id, credits)
