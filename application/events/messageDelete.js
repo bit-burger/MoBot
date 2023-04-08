@@ -10,12 +10,16 @@ module.exports = {
 
     // Handling event
     async execute(message) {
-        const isChangeable = await nonChangeableMessagesDao.isNonChangeableMessage(message.client, message.id)
-        if (!isChangeable) return
-        message.channel.send(userMention(message.author.id) + " was very naughty little boy :flushed:" +
-            " and now has to be spanked :cry: :peach: :weary: :yum: :biting_lip:")
-        const credits = await creditDao.getCredits(message.client, message.author.id)
-        credits -= 100
-        message.channel.send(`100 mo credits have therefore been subtracted from his mo credits, resulting in a score of ${credits}`)
+        const isNonChangeable = await nonChangeableMessagesDao.isNonChangeableMessage(message.client, message.id)
+        if (!isNonChangeable) return
+
+        const credits = await creditDao.getCredits(message.client, message.author.id) - 50
+
+        const authorID = await nonChangeableMessagesDao.getMessageAuthorID(message.client, message.id)
+        const user = await message.client.users.fetch(authorID)
+        const dmChannel = await user.createDM()
+        dmChannel.send("A message of yours to get 50 mo credits, has been deleted. " +
+            `This has resulted in the subtraction of the credits, and you now have ${credits} credits`)
+        nonChangeableMessagesDao.setIsChangeableMessage(message.client, message.id)
     }
 }

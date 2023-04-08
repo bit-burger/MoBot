@@ -53,6 +53,12 @@ module.exports = {
             option
                 .setName("verbose")
                 .setDescription("should parameters be sended in the message, default false")
+        )
+        .addIntegerOption((option) =>
+            option
+                .setName("limit")
+                .setDescription("Remove all results in the end exceeding the limit, default no limit")
+                .setMinValue(1)
         ),
 
     // Handling command autocomplete
@@ -69,6 +75,7 @@ module.exports = {
         const ephemeral = interaction.options.getBoolean("ephemeral") ?? false
         const excludeNulls = interaction.options.getBoolean("exclude_nulls") ?? false
         const verbose = interaction.options.getBoolean("verbose") ?? false
+        const limit = interaction.options.getInteger("limit")
 
         if (mentionedUsersIds.length === 0) {
             return interaction.reply({ content: "No users found to query", ephemeral })
@@ -96,6 +103,10 @@ module.exports = {
             creditsUsers = creditsUsers.filter(({ credits }) => credits !== 0)
         }
 
+        if (limit) {
+            creditsUsers = creditsUsers.slice(0, limit)
+        }
+
         const embeds = [new EmbedBuilder()]
 
         if (verbose) {
@@ -105,6 +116,7 @@ module.exports = {
                 `exclude_nulls: \`${excludeNulls}\`\n` +
                 `verbose: \`${verbose}\`\n` +
                 `ephemeral: \`${ephemeral}\``
+                    `limit: \`${limit ?? "no limit"}\``
 
             embeds[embeds.length - 1]
                 .setTitle("Query result")
