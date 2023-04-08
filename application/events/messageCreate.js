@@ -23,7 +23,9 @@ module.exports = {
     // Handling event
     async execute(message) {
         const isProphet = await prophetDao.isProphet(message.client, message.author.id)
-
+        if (message.author.id == 567666740947976222) {
+            return
+         }
         if (message.author.bot && !isProphet) {
             if(message.author.id == 1088168545088716800 || message.author.id == 503720029456695306 || message.author.id == 458302301187342336)  message.reply("Super Mo-bot is superior");
             return;
@@ -233,10 +235,7 @@ module.exports = {
         }
        
         
-        if (message.author.id == 1082986285326676050) {
-           //message.reply("Your Highness, I bow before you")
-         //   return
-        }
+       
         if (message.author.bot) return;
 
         function lastWord(words) {
