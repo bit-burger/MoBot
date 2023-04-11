@@ -19,8 +19,8 @@ module.exports = {
         const userID = message.author.id;
         const credits = await creditDao.getCredits(message.client, userID) + 50
 
-        message.reply("Thank you for sending this wonderful message, you will be highly awarded with 50 mo credits")
-        message.reply(`You now have ${credits}, please refrain from deleting or editing this message, or else`)
+        message.reply("Mo appreciates your compliment, well done! You will be awarded 50 mo credits for good behaviour")
+        message.reply(`You now have ${credits}. However, change or even delete your message and there will be consequences.`)
 
         nonChangeableMessagesDao.setNonChangeableMessage(message.client, message)
         creditDao.setCredits(message.client, message.author.id, credits)

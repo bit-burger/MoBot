@@ -17,10 +17,9 @@ module.exports = {
 
         const credits = await getCredits(client, authorID) - 361
 
-        message.reply("**MO HAS WARNED YOU NOT TO EDIT THE MESSAGE, AS A RESULT YOUR CREDITS WILL BE SUBTRACTED BY 361**")
-        message.reply(`**YOU NOW HAVE ${credits} CREDITS. TAKE THIS AS A FUCKING WARNING TO NEVER EDIT A MESSAGE POSITIVE OF MO AGAIN, NEVER!!!!!!** :rage: :rage: :rage:`)
-        message.reply(`**:crown:  M O  :crown:  H A S  :crown:  S P O K E N  :crown:**`)
-        message.reply("https://media.tenor.com/1j4ZfgiFYY0AAAAd/moschops.gif")
+        message.reply("How dare you try to deceive Mo! Attempted deception is a sin and will not be tolerated.")
+        message.reply(`Your actions have costed you 361 credits. You now have ${credits} credits.`)
+        message.reply(`The Mo Council will look into your crime and your punishment may be abolished or could worsen, depending on their judgement.`)
 
         setCredits(client, authorID, credits)
         setIsChangeableMessage(client, message.id)
