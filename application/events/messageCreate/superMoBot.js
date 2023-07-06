@@ -1,6 +1,10 @@
 const { Events } = require("discord.js")
+const fs = require("node:fs")
 const creditDao = require("../../../database/mo_credit_dao")
-
+const zitateBuffer = fs.readFileSync("./resources/bibelverse.txt")
+const zitate = zitateBuffer
+    .toString()
+    .split(/\r?\n/)
 module.exports = {
     async superMoBotHandler(message) {
         if (message.content.toLowerCase().includes("mo")) {
@@ -8,6 +12,10 @@ module.exports = {
                 message.reply("I am delighted I could help and serve you")
                 return
             }
+        }
+        const content = message.content.toLowerCase()
+       if ((content.includes("mo") && content.includes("bibel")) || content.includes("mobibel") || content.includes("mo-bibel")){
+
         }
 
         function getCredit(words) {
@@ -40,16 +48,11 @@ module.exports = {
             if (pName === "708227359916163137") return "Tony"
             return "Name not found. Perhaps the archives are incomplete?"
         }
-        const content = message.content.toLowerCase()
         if (content.includes("mobot")) {     //user interaction
             if (content.includes("credits")) {
                 //const name = "<@" + getId(content) + ">";
-                if (content.includes(" ich") || content.includes(" i ")) {
-                    const currentCredits = await creditDao.getCredits(message.client, message.author.id);
-                    message.reply("Currently, <@" + message.author.id.toString() + "> has " + currentCredits + ".\n" + "Do you wish for me to add or remove some credits?")
-                    return
-                }
-                else if (content.includes("ole") || content.includes("bolle") || content.includes("öli") || content.includes("hendrik")) {
+               
+                if (content.includes("ole") || content.includes("bolle") || content.includes("öli") || content.includes("hendrik")) {
                     const currentCredits = await creditDao.getCredits(message.client, "724949595330969643");
                     message.reply("Currently, <@724949595330969643> has " + currentCredits + ".\n" + "Do you wish for me to add or remove some credits?")
                     return
@@ -72,6 +75,11 @@ module.exports = {
                 else if (content.includes(" arnike") || content.includes(" annek") || content.includes(" anika") || content.includes(" timp") || content.includes(" anek")) {
                     const currentCredits = await creditDao.getCredits(message.client, "801913539173941288");
                     message.reply("Currently, <@801913539173941288> has " + currentCredits + ".\n" + "Do you wish for me to add or remove some credits?")
+                    return
+                }
+                else  if (content.includes(" ich") || content.includes(" i ")) {
+                    const currentCredits = await creditDao.getCredits(message.client, message.author.id);
+                    message.reply("Currently, you have " + currentCredits + ".\n" + "Do you wish for me to add or remove some credits?")
                     return
                 }
                 else {
@@ -107,19 +115,7 @@ module.exports = {
             //const zeichen = plusOrMinus(content)
             const credits = getCredit(content)
 
-            if (content.includes(" me ") || content.includes(" ich ") || content.includes(" i ") || content.includes(" mir ")) {
-                const currentCredits = await creditDao.getCredits(message.client, message.author.id);
-                if (strafe === "award") {
-                    await creditDao.setCredits(message.client, message.author.id, currentCredits + credits)
-                    message.reply("Very well. <@" + message.author.id.toString() + "> shall receive " + credits + " credits.")
-                }
-                if (strafe === "punish") {
-                    await creditDao.setCredits(message.client, message.author.id, currentCredits - credits)
-                    message.reply("Very well. I shall take " + credits + " credits from <@" + message.author.id.toString() + ">.")
-                }
-                return
-            }
-            else if (content.includes(" ole") || content.includes(" bolle") || content.includes(" öli") || content.includes(" hendrik")) {
+            if (content.includes(" ole") || content.includes(" bolle") || content.includes(" öli") || content.includes(" hendrik")) {
                 const currentCredits = await creditDao.getCredits(message.client, "724949595330969643");
                 if (strafe === "award") {
                     await creditDao.setCredits(message.client, "724949595330969643", currentCredits + credits)
@@ -176,6 +172,18 @@ module.exports = {
                 if (strafe === "punish") {
                     await creditDao.setCredits(message.client, "801913539173941288", currentCredits - credits)
                     message.reply("Very well. I shall take " + credits + " credits from <@801913539173941288>.")
+                }
+                return
+            }
+            else if (content.includes(" me ") || content.includes(" ich ") || content.includes(" i ") || content.includes(" mir ")) {
+                const currentCredits = await creditDao.getCredits(message.client, message.author.id);
+                if (strafe === "award") {
+                    await creditDao.setCredits(message.client, message.author.id, currentCredits + credits)
+                    message.reply("Very well. <@" + message.author.id.toString() + "> shall receive " + credits + " credits.")
+                }
+                if (strafe === "punish") {
+                    await creditDao.setCredits(message.client, message.author.id, currentCredits - credits)
+                    message.reply("Very well. I shall take " + credits + " credits from <@" + message.author.id.toString() + ">.")
                 }
                 return
             }
