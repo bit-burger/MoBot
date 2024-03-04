@@ -18,7 +18,7 @@ module.exports = {
         const authorID = await nonChangeableMessagesDao.getMessageAuthorID(message.client, message.id)
         const user = await message.client.users.fetch(authorID)
         const dmChannel = await user.createDM()
-        dmChannel.send("How dare you delete your message. Mo is not pleased. " +
+        dmChannel.send("How dare you delete your message. Mo is angry!. " +
             `The credits given to you have now been removed, you now have ${credits} credits`)
         nonChangeableMessagesDao.setIsChangeableMessage(message.client, message.id)
     }

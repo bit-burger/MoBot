@@ -1,4 +1,4 @@
-const canUseCommand = require("./general/can_use_command")
+const isTimeouted = require("./general/timeout_check.js")
 const fs = require("node:fs")
 const dao = require("../../database/mo_credit_dao")
 const zitateBuffer = fs.readFileSync("./resources/bibelverse.txt")
@@ -26,17 +26,18 @@ const moschopsGif = "https://media.tenor.com/1j4ZfgiFYY0AAAAC/moschops.gif";
 
 module.exports = {
     // Setting command information and options
-    data: new SlashCommandBuilder().setName("quote").setDescription("sends a quote from the Mo Bible"),
-    //.addIntegerOption((option) =>
-           // option.setName("how_many")
-             //   .setDescription("how many quotes do you want (max. 5 quotes)")
-               // .setRequired(true)),
+    data: new SlashCommandBuilder().setName("quote").setDescription("sends a quote from the Mo Bible")
+    .addIntegerOption((option) =>
+            option.setName("how_many")
+                .setDescription("how many quotes do you want (max. 5 quotes)")
+                .setRequired(true)),
 
     // Handling command autocomplete
     async autocomplete(interaction) { },
 
     // Handling command reponse
     async execute(interaction) {
+        if (await isTimeouted(interaction)) return
         let amountOfQuotes = interaction.options.getInteger("how_many")
         if(amountOfQuotes > 5) amountOfQuotes = 5;
         //if(amountOfQuotes > 5) {
