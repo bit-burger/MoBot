@@ -1,7 +1,12 @@
 const { Events } = require("discord.js")
 const fs = require("node:fs")
+const { userInteraction } = require("../messageCreate/privatedm.js")
 const creditDao = require("../../../database/mo_credit_dao")
 const chnText = fs.readFileSync("./resources/chnText.txt")
+const deBuffer = fs.readFileSync("./resources/de.txt")
+const de = deBuffer
+    .toString()
+    .split(/\r?\n/)///\r?\n/
 const gifBuffer = fs.readFileSync("./resources/gifs.txt")
 const gifs = gifBuffer
     .toString()
@@ -14,6 +19,11 @@ const jpBuffer = fs.readFileSync("./resources/japanese.txt")
 const jp = jpBuffer
     .toString()
     .split(/\r?\n/)
+    
+    function timeout(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
     function isChinese(pMessage, pChinese){
         var a = 0;
         var b = pChinese.length - 1;
@@ -38,17 +48,30 @@ const jp = jpBuffer
         }
         return false;
     }
+    function isGerman(pMessage, pGerman){
+        var a = 0;
+        var b = pGerman.length - 1;
+        while(a<b){
+            if(pMessage.includes(pGerman[a].toLowerCase())) {
+                return true;
+                a = b;
+            }
+            a++;
+        }
+        return false;
+    }
 module.exports = {
     async superMoBotHandler(message) {
-           
-        
-        if (message.content.toLowerCase().includes("mo")) {
-            if (message.content.toLowerCase().includes("thank") || message.content.toLowerCase().includes("thx") || message.content.toLowerCase().includes("dank") || message.content.toLowerCase().includes("gut") || message.content.toLowerCase().includes("good")) {
-                message.reply("I am delighted I could help and serve you")
-                return
-            }
-        }
         const content = message.content.toLowerCase()
+        if (content.includes("mo")) {
+            if(content.includes("explain") || content.includes("erklär")) userInteraction(message);
+        }
+        if(isGerman(content, de)){
+            const reply = await message.reply("https://tenor.com/view/ww2-croatia-gif-18606680")
+            await timeout(2500)
+            reply.delete()
+            return
+        }
         if (content.includes("emma")) message.reply(":troll:");
         if(content.includes("dua")){
             if(content.includes("dual")) return

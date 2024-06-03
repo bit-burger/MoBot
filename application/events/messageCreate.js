@@ -7,6 +7,7 @@ const { checkForPositiveWords } = require("./messageCreate/positiveCheck")
 const creditDao = require("../../database/mo_credit_dao")
 
 const { ignoredUsers = [] } = require("../../configuration.json")
+const messageDelete = require("./messageDelete")
 
 module.exports = {
     // Setting event name and kind
@@ -15,6 +16,7 @@ module.exports = {
 
     // Handling event
     async execute(message) {
+        //if(message.content.includes("https://tenor.com/view/ww2-croatia-gif-18606680") && message.author.bot) message.delete(1000); //ns check
         const authorId = message.author.id
         //if (message.author.bot) message.reply("2")
         if (ignoredUsers.includes(authorId)) return
